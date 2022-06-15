@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  # See http://www.globalsight.com/wiki/index.php/Installing_GlobalSight_on_Ubuntu
+  web:
+    container_name: web
+    image: retiman/globalsight-web
+    build: ./web
+    ports:
+      - 8080:8080
+      - 9990:9990
+    volumes:
+      - ./data/docs:/home/jboss/globalsight/docs
+      - ./data/filestorage:/home/jboss/globalsight/filestorage
+      - ./data/winfiles:/home/jboss/globalsight/winfiles
+      - ./data/init:/home/jboss/globalsight/init
+
+  # See http://www.globalsight.com/wiki/index.php/Installing_Third-party_Components_for_GlobalSight_on_Ubuntu
+  db:
+    container_name: db
+    image: retiman/globalsight-db
+    build: ./db
+    environment:
+      - MYSQL_DATABASE=globalsight
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/mysql:/var/mysql/data
+
+  dbadmin:
+    container_name: dbadmin
+    image: phpmyadmin:5.1.1
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+    ports:
+      - 8081:80
