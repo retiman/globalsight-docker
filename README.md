@@ -1,6 +1,6 @@
 # globalsight-docker
 
-Dockerfiles for quickly getting a demo of GlobalSight up and running.  Also runs phpMyAdmin in case you want to quickly
+Dockerfiles for quickly getting a demo of [GlobalSight](http://www.globalsight.com/wiki/index.php/Main_Page) up and running.  Also runs phpMyAdmin in case you want to quickly
 inspect the database.
 
 ![GlobalSight](globalsight.png?raw=true "GlobalSight")
